@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Thwayne Shop — School Uniforms</title>
+  <meta name="description" content="Thwayne Shop — Quality school uniforms: primary, sweaters, tracksuits, school bags. Contact via WhatsApp.">
+  <style>
+    :root{--bg:#fff;--accent1:#3b82f6;--accent2:#fbbf24;--accent3:#10b981;--text:#0f172a}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, Arial; margin:0; color:var(--text); background:linear-gradient(180deg,#fff 0%, #f8fafc 100%);} 
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;}
+    .logo{display:flex;gap:12px;align-items:center}
+    .brand-name{font-weight:800;font-size:20px;letter-spacing:0.5px;color:var(--accent1)}
+    .tag{font-size:13px;color:#334155}
+    nav a{margin-left:12px;text-decoration:none;color:#374151;font-weight:600}
+
+    .hero{display:flex;gap:32px;align-items:center;padding:36px 24px}
+    .hero-left{max-width:640px}
+    h1{font-size:36px;margin:0 0 12px}
+    p.lead{margin:0 0 18px;font-size:16px}
+    .cta{display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;font-weight:700;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:white;text-decoration:none;box-shadow:0 6px 18px rgba(59,130,246,.18);transform-origin:center}
+    .cta:active{transform:translateY(2px)}
+
+    .hero-right{flex:1}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,.9));border-radius:18px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,.06)}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}
+    .item{border-radius:12px;padding:12px;background:#fff;border:1px solid #eef2ff}
+    .item img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .item h3{margin:8px 0 4px}
+    .price{color:#6b7280;font-size:14px}
+
+    footer{padding:22px 24px;background:#0f172a;color:white;margin-top:28px;border-radius:12px}
+
+    /* playful bounce */
+    @keyframes bouncey{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+    .logo-mark{display:inline-block;animation:bouncey 2s infinite}
+
+    /* Floating WhatsApp */
+    .whatsapp{position:fixed;right:18px;bottom:18px;background:#25D366;color:white;padding:14px;border-radius:999px;box-shadow:0 8px 30px rgba(37,211,102,.18);text-decoration:none;font-weight:800;display:flex;gap:10px;align-items:center}
+    .whatsapp svg{width:20px;height:20px}
+
+    /* responsive */
+    @media(max-width:720px){h1{font-size:26px}.hero{flex-direction:column}.hero-right{order:2;width:100%}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <!-- SVG logo (playful school badge) -->
+      <svg class="logo-mark" width="56" height="56" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0" stop-color="#3b82f6"/>
+            <stop offset="1" stop-color="#f59e0b"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="8" width="60" height="44" rx="10" fill="url(#g1)"/>
+        <circle cx="20" cy="26" r="7" fill="#fff" opacity="0.95"/>
+        <path d="M36 20c6 0 10 4 10 9s-4 9-10 9-10-4-10-9 4-9 10-9z" fill="#fff" opacity="0.9"/>
+        <text x="32" y="48" font-size="8" text-anchor="middle" fill="#07303a" font-weight="700">TS</text>
+      </svg>
+      <div>
+        <div class="brand-name">Thwayne Shop</div>
+        <div class="tag">Quality school uniforms • Primary • Sweaters • Tracksuits</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h1>School uniforms made simple — built for parents & schools</h1>
+        <p class="lead">Thwayne Shop supplies quality primary school uniforms, warm sweaters, comfortable tracksuits and durable school bags. Bright, playful styles with strong stitching — ideal for daily school use.</p>
+        <a class="cta" href="#contact">Message on WhatsApp — Order now</a>
+
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+          <div style="background:var(--accent2);padding:8px 12px;border-radius:10px;font-weight:700">Free sizing help</div>
+          <div style="background:var(--accent3);padding:8px 12px;border-radius:10px;font-weight:700;color:white">Bulk school discounts</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card">
+          <h3 style="margin:0 0 6px">Featured — Primary Uniform</h3>
+          <p style="margin:0 0 12px">Neat shirts, comfortable shorts/skirts and easy-care fabric recommended for daily use.</p>
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9XTxB38xKlo" alt="Primary uniform example" style="width:100%;border-radius:10px;height:260px;object-fit:cover">
+        </div>
+      </div>
+    </section>
+
+    <section id="products" style="padding:0 24px">
+      <h2 style="margin-top:6px">Our categories</h2>
+      <div class="grid">
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=9XTxB38xKlo" alt="Primary uniforms">
+          <h3>Primary Uniforms</h3>
+          <p class="price">Shirts, skirts, shorts — sizes 3-16</p>
+        </div>
+
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1516972810927-80185027ca84?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=LYL31WBHynQ" alt="Sweaters and cardigans">
+          <h3>Sweaters & Cardigans</h3>
+          <p class="price">Warm, machine-washable jumpers with school crest options</p>
+        </div>
+
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=UiZi8QILrjs" alt="Tracksuits">
+          <h3>Tracksuits / PE</h3>
+          <p class="price">Comfortable PE sets — breathable fabric for sports</p>
+        </div>
+
+        <div class="item">
+          <img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=b5UILRPGV_g" alt="School bags">
+          <h3>School Bags</h3>
+          <p class="price">Durable bags with padded straps — multiple sizes</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" style="padding:0 24px;margin-top:6px">
+      <h2>About Thwayne Shop</h2>
+      <p>We specialise in school uniform supplies with focus on durability and comfort. Whether you’re outfitting a single child or placing a bulk school order, we offer sizing help and quick WhatsApp support.</p>
+    </section>
+
+    <section id="contact" style="padding:18px 24px">
+      <h2>Contact & Visit</h2>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:16px">
+        <div>
+          <p><strong>WhatsApp / Phone:</strong> <a href="https://wa.me/25416661159" target="_blank" rel="noreferrer">+254 166 611 159</a></p>
+          <p><strong>Email:</strong> <em>hello@thwayne.shop</em> (placeholder — create one or tell me where to forward orders)</p>
+          <p><strong>Hours:</strong> Mon–Sat 9:00 — 18:00</p>
+          <p><strong>Notes:</strong> We provide bulk discounts for schools. Ask via WhatsApp for sample swatches.</p>
+        </div>
+        <div>
+          <!-- Generic map placeholder (edit with your full address later) -->
+          <iframe title="map" width="100%" height="220" frameborder="0" style="border:0;border-radius:10px" src="https://www.google.com/maps?q=Kenya&output=embed" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>
+        <div style="font-weight:800">Thwayne Shop</div>
+        <div style="font-size:13px;opacity:.9">School uniforms • Primary • Sweaters • Tracksuits</div>
+      </div>
+      <div style="opacity:.9">Made with ❤️ — Send orders on WhatsApp</div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp button -->
+  <a class="whatsapp" href="https://wa.me/25416661159" target="_blank" rel="noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.973 2.027A11.894 11.894 0 0 0 12 0C5.373 0 .002 5.373.002 12c0 2.11.55 4.16 1.596 5.957L0 24l6.267-1.64A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.247-6.193-3.027-8.303z" fill="#fff" opacity=".06"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.47-.149-.669.15-.198.297-.767.967-.942 1.166-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.786-1.48-1.755-1.654-2.052-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.52-.075-.149-.669-1.611-.916-2.205-.242-.579-.487-.5-.668-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.064 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487 3.98 1.71 3.98 1.14 4.69 1.074.198-.012.767-.099.877-.197.11-.099.372-.397.672-.77.297-.373.397-.696.448-.797.05-.099.025-.174-.223-.323z" fill="#fff"/></svg>
+    Chat via WhatsApp
+  </a>
+
+</body>
+</html>
