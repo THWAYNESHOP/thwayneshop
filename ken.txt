@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Uniform.Cyber — Dark Shop</title>
+  <style>
+    :root{--bg:#0b0f13;--card:#0f1720;--muted:#9aa5b1;--accent:#00e5ff;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#e6eef3;background:linear-gradient(180deg,#020304 0%, #071019 100%);-webkit-font-smoothing:antialiased}
+    header{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#08121a,#02121a);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700}
+    .title{font-size:18px;font-weight:700}
+    .subtitle{font-size:12px;color:var(--muted);margin-top:2px}
+    .controls{display:flex;gap:12px;align-items:center}
+    .search{background:var(--card);border:0;padding:8px 12px;border-radius:10px;color:#dfeef7;width:220px}
+    .btn{background:var(--accent);border:0;color:#031016;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    main{padding:24px;max-width:1200px;margin:0 auto}
+    .hero{display:flex;gap:18px;align-items:center;margin-bottom:20px}
+    .hero .left{flex:1}
+    .hero h1{margin:0;font-size:28px}
+    .hero p{color:var(--muted);margin:8px 0 0}
+    .filters{display:flex;gap:10px;margin:12px 0 20px}
+    .chip{padding:8px 12px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:var(--muted)}
+    .chip.active{background:linear-gradient(90deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02));color:var(--accent);border-color:rgba(0,229,255,0.18)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:8px;background:#071018}
+    .card h3{margin:8px 0 4px;font-size:16px}
+    .price{font-weight:700;color:var(--accent)}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    footer{padding:20px;text-align:center;color:var(--muted)}
+    .cart-btn{position:fixed;right:20px;bottom:20px;background:linear-gradient(90deg,#00e5ff,#00b7ff);border-radius:999px;padding:14px 18px;color:#021018;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,0.5);cursor:pointer}
+    /* modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,4,6,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal{background:linear-gradient(180deg,#071019,#041018);padding:18px;border-radius:12px;max-width:520px;width:100%;border:1px solid rgba(255,255,255,0.04)}
+    .row{display:flex;gap:8px;align-items:center}
+    .input{background:var(--card);border:0;padding:10px;border-radius:8px;color:#dfeef7;width:100%}
+    .product-list{max-height:260px;overflow:auto;margin:8px 0}
+    .product-item{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+    .product-item img{width:48px;height:48px;object-fit:cover;border-radius:6px}
+    @media (max-width:640px){.hero{flex-direction:column;align-items:flex-start}.search{width:140px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">UC</div>
+      <div>
+        <div class="title">uniform.cyber</div>
+        <div class="subtitle">Dark shop — Men • Accessories • Tech</div>
+      </div>
+    </div>
+    <div class="controls">
+      <input class="search" id="search" placeholder="Search products..." />
+      <button class="btn" id="openCart">Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="left">
+        <h1>Welcome to uniform.cyber</h1>
+        <p>Dark & cool curated uniforms, tech gear and accessories. Fast checkout with M-Pesa or message us on WhatsApp.</p>
+        <div class="filters" id="filters">
+          <div class="chip active" data-cat="all">All</div>
+          <div class="chip" data-cat="men">Men</div>
+          <div class="chip" data-cat="accessories">Accessories</div>
+          <div class="chip" data-cat="tech">Tech</div>
+        </div>
+      </div>
+      <div class="right">
+        <img src="images/hero-placeholder.jpg" alt="hero" style="width:220px;height:140px;object-fit:cover;border-radius:12px;background:#071018" />
+      </div>
+    </section>
+
+    <section>
+      <div class="grid" id="productGrid">
+        <!-- Product cards (replace images in /images/) -->
+        <template id="productTpl">
+          <div class="card">
+            <img src="" alt="product" />
+            <h3></h3>
+            <div style="color:var(--muted);font-size:13px" class="desc"></div>
+            <div class="meta">
+              <div class="price"></div>
+              <button class="btn add">Add</button>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+  </main>
+
+  <button class="cart-btn" id="openCart2">Open Cart</button>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h3>Your Cart</h3>
+      <div class="product-list" id="cartItems"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+        <div style="color:var(--muted)">Total: <strong id="cartTotal">KSh 0</strong></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn" id="checkoutMpesa">Pay with M-Pesa</button>
+          <button class="btn" id="checkoutWhatsapp">Contact on WhatsApp</button>
+        </div>
+      </div>
+      <div style="margin-top:12px;color:var(--muted);font-size:13px">M-Pesa: Edit the paybill/account or use Lipa na M-Pesa till in the code. After payment, message us on WhatsApp to confirm.</div>
+      <div style="margin-top:10px;display:flex;justify-content:flex-end;gap:8px">
+        <button class="btn" id="closeModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>Contact: <a id="whatsappLink" href="#">WhatsApp</a> • Phone: +254116661159</div>
+    <div style="margin-top:6px;color:var(--muted);font-size:13px">All images are placeholders — replace files in the <code>/images/</code> folder with your own photos.</div>
+  </footer>
+
+  <script>
+    /* ---------- CONFIG (edit these) ---------- */
+    const CONFIG = {
+      whatsapp: '+254116661159', // seller number (you provided)
+      mpesa: {
+        paybill: 'YOUR_PAYBILL', // set your Paybill or Till
+        accountReferencePrefix: 'UC',
+      }
+    }
+
+    // sample product data — update with your items and prices
+    const PRODUCTS = [
+      {id:1,title:'Uniform Jacket (Men)',cat:'men',price:1400,image:'images/product-1.jpg',desc:'Comfort fit jacket.'},
+      {id:2,title:'Tactical Belt',cat:'accessories',price:350,image:'images/product-2.jpg',desc:'Durable tactical belt.'},
+      {id:3,title:'USB-C Tactical Adapter',cat:'tech',price:800,image:'images/product-3.jpg',desc:'Fast charging adapter.'},
+      {id:4,title:'Uniform Shirt (Men)',cat:'men',price:1000,image:'images/product-4.jpg',desc:'Breathable shirt.'},
+      {id:5,title:'Phone Holster',cat:'accessories',price:450,image:'images/product-5.jpg',desc:'Secure holster for phones.'},
+      {id:6,title:'Power Bank 10,000mAh',cat:'tech',price:2200,image:'images/product-6.jpg',desc:'High-capacity power bank.'}
+    ]
+
+    /* ---------- UI CODE ---------- */
+    const grid = document.getElementById('productGrid')
+    const tpl = document.getElementById('productTpl')
+    const filters = document.getElementById('filters')
+    const cartCount = document.getElementById('cartCount')
+    const cartItemsEl = document.getElementById('cartItems')
+    const cartTotalEl = document.getElementById('cartTotal')
+    const modal = document.getElementById('modal')
+
+    function renderProducts(list){
+      grid.innerHTML = ''
+      list.forEach(p=>{
+        const node = tpl.content.cloneNode(true)
+        const card = node.querySelector('.card')
+        card.querySelector('img').src = p.image
+        card.querySelector('img').alt = p.title
+        card.querySelector('h3').innerText = p.title
+        card.querySelector('.desc').innerText = p.desc
+        card.querySelector('.price').innerText = 'KSh ' + p.price
+        node.querySelector('.add').addEventListener('click', ()=>{ addToCart(p) })
+        grid.appendChild(node)
+      })
+    }
+
+    function filterBy(cat){
+      const chips = document.querySelectorAll('.chip')
+      chips.forEach(c=>c.classList.toggle('active', c.dataset.cat===cat || (cat==='all' && c.dataset.cat==='all')))
+      if(cat==='all') renderProducts(PRODUCTS)
+      else renderProducts(PRODUCTS.filter(p=>p.cat===cat))
+    }
+
+    filters.addEventListener('click', e=>{
+      const chip = e.target.closest('.chip')
+      if(!chip) return
+      const cat = chip.dataset.cat
+      document.getElementById('search').value = ''
+      filterBy(cat)
+    })
+
+    document.getElementById('search').addEventListener('input', e=>{
+      const q = e.target.value.toLowerCase()
+      renderProducts(PRODUCTS.filter(p=>p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)))
+    })
+
+    /* ---------- Cart ---------- */
+    const CART_KEY = 'uc_cart_v1'
+    function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY))||[] }catch(e){return[]} }
+    function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); updateCartUI() }
+    function addToCart(p){ const c = getCart(); const found = c.find(x=>x.id===p.id); if(found) found.qty+=1; else c.push({...p,qty:1}); saveCart(c) }
+    function removeFromCart(id){ let c = getCart(); c=c.filter(x=>x.id!==id); saveCart(c) }
+    function updateCartUI(){ const c = getCart(); const count = c.reduce((s,i)=>s+i.qty,0); cartCount.innerText = count; }
+
+    function openCart(){ modal.style.display='flex'; renderCartItems() }
+    function closeCart(){ modal.style.display='none' }
+
+    function renderCartItems(){ const c = getCart(); cartItemsEl.innerHTML = '';
+      if(c.length===0){ cartItemsEl.innerHTML='<div style="color:var(--muted)">Your cart is empty.</div>'; cartTotalEl.innerText='KSh 0'; return }
+      let total=0
+      c.forEach(item=>{
+        const div = document.createElement('div'); div.className='product-item'
+        div.innerHTML = `<img src="${item.image}"/><div style=\"flex:1\"><div style=\"font-weight:700\">${item.title}</div><div style=\"color:var(--muted);font-size:13px\">KSh ${item.price} × ${item.qty}</div></div><div style=\"text-align:right\"><div style=\"font-weight:700\">KSh ${item.price*item.qty}</div><button class=\"btn\" data-remove=\"${item.id}\">Remove</button></div>`
+        cartItemsEl.appendChild(div)
+        total += item.price * item.qty
+      })
+      cartTotalEl.innerText = 'KSh ' + total
+      cartItemsEl.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click', e=>{ removeFromCart(parseInt(e.target.dataset.remove)); renderCartItems() }))
+    }
+
+    document.getElementById('openCart').addEventListener('click', openCart)
+    document.getElementById('openCart2').addEventListener('click', openCart)
+    document.getElementById('closeModal').addEventListener('click', closeCart)
+
+    document.getElementById('checkoutWhatsapp').addEventListener('click', ()=>{
+      const c = getCart(); if(c.length===0){ alert('Cart is empty'); return }
+      const items = c.map(i=>`${i.title} x${i.qty} (KSh ${i.price*i.qty})`).join('%0A')
+      const total = c.reduce((s,i)=>s+i.price*i.qty,0)
+      const msg = `Hello! I want to order from Uniform.Cyber:%0A${items}%0A%0ATotal: KSh ${total}%0AName:%0ADelivery address:%0A`;
+      const url = `https://wa.me/${CONFIG.whatsapp.replace(/\+/g,'')}?text=${msg}`
+      window.open(url,'_blank')
+    })
+
+    document.getElementById('checkoutMpesa').addEventListener('click', ()=>{
+      const c = getCart(); if(c.length===0){ alert('Cart is empty'); return }
+      const total = c.reduce((s,i)=>s+i.price*i.qty,0)
+      // Instructions modal
+      alert(`To pay with M-Pesa:\n\n1) Go to Lipa na M-Pesa -> Paybill/Till.\n2) Use Paybill: ${CONFIG.mpesa.paybill} (edit in code)\n3) Account/Ref: ${CONFIG.mpesa.accountReferencePrefix}${Math.floor(Math.random()*9000+1000)}\n4) Enter amount: KSh ${total}\n5) Complete payment and send us the MPESA confirmation on WhatsApp.`)
+    })
+
+    // init
+    renderProducts(PRODUCTS)
+    updateCartUI()
+
+    // replace footer whatsapp link
+    document.getElementById('whatsappLink').href = `https://wa.me/${CONFIG.whatsapp.replace(/\+/g,'')}`
+
+    // small: try to load images; if missing use placeholder
+    document.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('error', ()=>{ img.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%23081218\'/><text x=\'50%\' y=\'50%\' fill=\'%239aa5b1\' font-size=\'20\' dominant-baseline=\'middle\' text-anchor=\'middle\'>Replace /images/*.jpg with your photos</text></svg>' })
+    })
+
+    // helpful note: developer can replace PRODUCTS array with real data or load JSON from server
+  </script>
+</body>
+</html>
